@@ -41,11 +41,12 @@ class dataController extends Controller
             //YOU CAN ADD MORE TO READ MORE COLUMNS :)
             $array = [$firstColumn, $SecondColumn, $ThirdColumn, $FourthColumn, $FifthColumn];
             session()->put('array', $array);
+            dd(session()->get('array'));
         }
 
 
 
-        Excel::import(new DataImport, $request->file);
-        return 'data loaded :) ';
+        // Excel::import(new DataImport, $request->file);
+        // return 'data loaded :) ';
     }
 }
