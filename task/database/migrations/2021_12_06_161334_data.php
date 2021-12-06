@@ -13,12 +13,12 @@ class Data extends Migration
      */
     public function up()
     {
-        $array = $session()->get('array');
-        dd($array);
+        // $array = $session()->get('array');
+        // dd($array);
         Schema::table('data', function (Blueprint $table) {
-            for ($i = 0; $i < $array . length; $i++) {
-                $table->$array[$i];
-            }
+            // for ($i = 0; $i < $array . length; $i++) {
+            //     $table->$array[$i];
+            // }
         });
     }
 
