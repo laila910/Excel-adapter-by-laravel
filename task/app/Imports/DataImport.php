@@ -18,10 +18,27 @@ class DataImport implements ToModel, WithHeadingRow
     {
 
         // $keys = $row->keys();
-        list($keys, $values) = array_divide($row);
-        dd($keys);
-        return new data([
-            //
-        ]);
+        // list($keys, $values) = array_divide($row);
+        // dd($keys);
+        $array = [];
+        foreach ($row as $key => $value) {
+
+            array_push($array, $key);
+        }
+        foreach ($array as $key) {
+            Validator::make($row, [
+                $key => 'required',
+
+            ])->validate();
+        }
+        if (count($array) > 0) {
+            foreach ($array as $key => $value) {
+               $Data= new data([
+                    $key => $value,
+
+                ]);
+            }
+        } else
+            return $Data;
     }
 }

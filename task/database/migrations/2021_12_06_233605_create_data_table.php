@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Data extends Migration
+class CreateDataTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class Data extends Migration
      */
     public function up()
     {
-        $array = $session()->get('array');
-        for ($i = 0; $i < $array . length; $i++) {
-            Schema::table('data', function (Blueprint $table) {
-
-                $table->string($array[$i]);
-            });
-        }
+        Schema::create('data', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
     }
 
     /**
