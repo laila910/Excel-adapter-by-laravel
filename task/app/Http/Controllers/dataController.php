@@ -46,7 +46,13 @@ class dataController extends Controller
             // return 'data loaded :) ';
             // DB::table('data')
         }
+$data=$session() ->get('array') ;
+foreach ($data as $key) {
+            Validator::make($data, [
+                $key => 'required',
 
+            ])->validate();
+        }
 
 
         Excel::import(new DataImport, $request->file);
