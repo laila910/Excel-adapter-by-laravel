@@ -25,12 +25,6 @@ class DataImport implements ToModel, WithHeadingRow
 
             array_push($array, $key);
         }
-        foreach ($array as $key) {
-            Validator::make($row, [
-                $key => 'required',
-
-            ])->validate();
-        }
         if (count($array) > 0) {
             foreach ($array as $key => $value) {
                $Data= new data([
