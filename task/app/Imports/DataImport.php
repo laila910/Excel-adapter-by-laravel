@@ -25,14 +25,15 @@ class DataImport implements ToModel, WithHeadingRow
 
             array_push($array, $key);
         }
+$Data=[] ;
+function array_push_assoc($array, $key, $value){
+   $array[$key] = $value;
+   return $array;
+}
         if (count($array) > 0) {
             foreach ($array as $key => $value) {
-               $Data= new data([
-                    $key => $value,
-
-                ]);
-            }
+               $Data=  array_push_assoc($Data, $key, $value) ;
         } else
-            return $Data;
+            return new date($Data) ;
     }
 }
