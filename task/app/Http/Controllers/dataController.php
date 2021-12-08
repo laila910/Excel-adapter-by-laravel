@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\data;
+use App\Models\content;
 use Excel;
 use App\Imports\DataImport;
 use Maatwebsite\Excel\Facades\Excel as FacadesExcel;
 use Maatwebsite\Excel\HeadingRowImport;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx as ReaderXlsc;
+use Illuminate\Support\Facades\DB;
 
 
 use Importer;
@@ -22,6 +24,10 @@ class dataController extends Controller
 
     public function import(Request $request)
     {
+        //         if(Schema::hasTable('content')){
+// DB::delete('DROP TABLE content');
+//         }
+    
         $path = storage_path() . '/app/' . request()->file('file')->store('tmp');
         $reader = new ReaderXlsc();
         $spreadsheet = $reader->load($path);
@@ -45,6 +51,20 @@ class dataController extends Controller
             // Excel::import(new DataImport, session()->get($array));
             // return 'data loaded :) ';
             // DB::table('data')
+            
+               $createTableSqlString =
+  "CREATE TABLE  content (
+      $firstColumn INT(11) NOT NULL AUTO_INCREMENT,
+      $SecondColumn Varchar(100) NOT NULL,
+      $ThirdColumn Varchar(100) Not Null,
+      $FourthColumn Varchar(100) Not Null,
+      $FifthColumn Varchar(100) Not Null,
+      
+    )
+    COLLATE='utf8mb4_unicode_ci	'
+    ENGINE=InnoDB
+    AUTO_INCREMENT=1";
+       DB::statement($createTableSqlString);
         }
 $data=$session() ->get('array') ;
 foreach ($data as $key) {
@@ -56,5 +76,6 @@ foreach ($data as $key) {
 
 
         Excel::import(new DataImport, $request->file);
+        return 'data inserted';
     }
 }
